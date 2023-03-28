@@ -7,3 +7,6 @@ This repository contains weekly excercises as well as the main project files for
 ### Viikko 1
 #### [gitlog.txt](laskarit/viikko1/gitlog.txt)
 #### [komentorivi.txt](laskarit/viikko1/komentorivi.txt)
+
+## Viikko 2
+![Coveragen generoima raportti](laskarit/viikko2/coverager-report.png)
