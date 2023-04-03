@@ -5,7 +5,6 @@ description = "Budget management application for school"
 authors = ["LeeviHalme <29179759+LeeviHalme@users.noreply.github.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "budget_manager"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
