@@ -14,5 +14,9 @@ git clone git@github.com:LeeviHalme/ot-harjoitustyo.git
 ```
 cd budget-manager
 ```
-
-*Coming soon...*
+```
+poetry install
+```
+```
+poetry run invoke start
+```
