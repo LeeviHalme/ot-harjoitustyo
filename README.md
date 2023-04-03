@@ -10,5 +10,5 @@ This repository contains weekly excercises as well as the main project files for
 
 ## Viikko 2
 ![Coveragen generoima raportti](laskarit/viikko2/coverager-report.png)
-- [Sovelluksen vaatimusmäärittely](docs/VAATIMUSMAARITTELY.md)
-- [Tuntikirjanpito](docs/TUNTIKIRJANPITO.md)
+- [Sovelluksen vaatimusmäärittely](dokumentaatio/VAATIMUSMAARITTELY.md)
+- [Tuntikirjanpito](dokumentaatio/TUNTIKIRJANPITO.md)

@@ -4,8 +4,8 @@ Feature list as well as development pland and personal timekeeping can be found 
 
 ### Quick links
 - [README](/README.md)
-- [Requirements Specification](/docs/VAATIMUSMAARITTELY.md)
-- [Hourly Accounting](/docs/TUNTIKIRJANPITO.md)
+- [Requirements Specification](/dokumentaatio/VAATIMUSMAARITTELY.md)
+- [Hourly Accounting](/dokumentaatio/TUNTIKIRJANPITO.md)
 
 ## Local Setup
 ```sh
