@@ -6,6 +6,7 @@ Feature list as well as development pland and personal timekeeping can be found 
 - [README](/README.md)
 - [Requirements Specification](/dokumentaatio/VAATIMUSMAARITTELY.md)
 - [Hourly Accounting](/dokumentaatio/TUNTIKIRJANPITO.md)
+- [Changelog](/dokumentaatio/CHANGELOG.md)
 
 ## Local Setup
 ```sh
