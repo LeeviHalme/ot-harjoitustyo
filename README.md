@@ -12,3 +12,8 @@ This repository contains weekly excercises as well as the main project files for
 ![Coveragen generoima raportti](laskarit/viikko2/coverager-report.png)
 - [Sovelluksen vaatimusmäärittely](dokumentaatio/VAATIMUSMAARITTELY.md)
 - [Tuntikirjanpito](dokumentaatio/TUNTIKIRJANPITO.md)
+
+## Viikko 3
+- [monopoli.md](laskarit/viikko3/monopoli.md)
+- [sekvenssi_kone.png](laskarit/viikko3/sekvenssi_kone.png)
+- [sekvenssi_hsl.png](laskarit/viikko3/sekvenssi_hsl.png)
