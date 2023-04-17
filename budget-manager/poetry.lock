@@ -96,6 +96,36 @@ files = [
 toml = ["tomli"]
 
 [[package]]
+name = "customtkinter"
+version = "5.1.2"
+description = "Create modern looking GUIs with Python"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "customtkinter-5.1.2-py3-none-any.whl", hash = "sha256:30fe0d40f0b43b60177e87013e932377a3ae8bf46921528488ae1adbb0aeafdf"},
+    {file = "customtkinter-5.1.2.tar.gz", hash = "sha256:eedaa11edce76b6882a605864a11b4859643ba0f4f456841aad51d89a758d32c"},
+]
+
+[package.dependencies]
+darkdetect = "*"
+
+[[package]]
+name = "darkdetect"
+version = "0.8.0"
+description = "Detect OS Dark Mode from Python"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "darkdetect-0.8.0-py3-none-any.whl", hash = "sha256:a7509ccf517eaad92b31c214f593dbcf138ea8a43b2935406bbd565e15527a85"},
+    {file = "darkdetect-0.8.0.tar.gz", hash = "sha256:b5428e1170263eb5dea44c25dc3895edd75e6f52300986353cd63533fe7df8b1"},
+]
+
+[package.extras]
+macos-listener = ["pyobjc-framework-Cocoa"]
+
+[[package]]
 name = "exceptiongroup"
 version = "1.1.1"
 description = "Backport of PEP 654 (exception groups)"
@@ -201,4 +231,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "f1e3027fb94924d520d8dffb4799a97a08ef71dec97c6efcd005ed382546a225"
+content-hash = "765cc673acfc87d845b3858a6e46e8ec5865c5df99e0cc46218389e782a7edad"
