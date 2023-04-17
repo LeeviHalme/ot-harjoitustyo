@@ -2,9 +2,8 @@ from tkinter import ttk, constants
 
 
 class LoginView:
-    def __init__(self, window, handle_login) -> None:
+    def __init__(self, window) -> None:
         self.window = window
-        self.handle_login = handle_login
         self.frame = None
 
         self.init()
