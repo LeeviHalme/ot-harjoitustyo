@@ -1,7 +1,11 @@
-from tkinter import Tk
+import customtkinter
 from ui import UI as GraphInterface
 
-window = Tk()
+# CustomTkInter Setup
+customtkinter.set_appearance_mode("System")
+customtkinter.set_default_color_theme("blue")
+
+window = customtkinter.CTk()
 window.title("Budjetointisovellus v.1.0.0")
 window.geometry("1000x500")
 
