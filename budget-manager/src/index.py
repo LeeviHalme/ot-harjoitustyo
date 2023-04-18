@@ -9,6 +9,10 @@ window = customtkinter.CTk()
 window.title("Budjetointisovellus v.1.0.0")
 window.geometry("1000x500")
 
+# configure tkinter's grid system
+window.columnconfigure(0, weight=1)
+window.rowconfigure(0, weight=1)
+
 ui = GraphInterface(window)
 ui.start()
 
