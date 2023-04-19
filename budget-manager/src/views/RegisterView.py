@@ -40,29 +40,30 @@ class RegisterView:
         # get vars from state
         name = self.name_entry.get()
         username = self.username_entry.get()
-        password = self.username_entry.get()
+        password = self.password_entry.get()
         password_confirm = self.password_confirm_entry.get()
 
         # if passwords won't match
         if password != password_confirm:
             tkinter.messagebox.showerror(
-                title="Oops!", message="Password and confirmation doesn't match"
+                title="Rekisteröinti epäonnistui", message="Salasanat eivät täsmää!"
             )
             return
 
         # use repository method
-        success = self.repository.register(name, username, password)
+        success = self.repository.registerNewUser(name, username, password)
 
         # if register wasn't successful
         if not success:
             tkinter.messagebox.showerror(
-                title="Oops!", message="Account with this email already exists!"
+                title="Rekisteröinti epäonnistui",
+                message="Tällä käyttätunnuksella on jo tili!",
             )
             return
 
         # redirect to budgets view
         user = self.repository.get_session()
-        print("REGISTER SUCCESS", user)
+        print("REGISTER SUCCESS:", user)
 
     def pack(self):
         self.frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
@@ -71,7 +72,7 @@ class RegisterView:
         self.frame.destroy()
 
     def init(self):
-        self.frame = CTkFrame(self.window)
+        self.frame = CTkFrame(self.window, fg_color="transparent")
 
         # configure layout
         self.frame.columnconfigure(0, weight=2)
@@ -116,8 +117,10 @@ class RegisterView:
         l6 = CTkLabel(f2, text="Salasana uudelleen")
         self.name_entry = CTkEntry(f2, placeholder_text="Matti Meikäläinen")
         self.username_entry = CTkEntry(f2, placeholder_text="mattimeika")
-        self.password_entry = CTkEntry(f2, placeholder_text="**************")
-        self.password_confirm_entry = CTkEntry(f2, placeholder_text="**************")
+        self.password_entry = CTkEntry(f2, placeholder_text="**************", show="*")
+        self.password_confirm_entry = CTkEntry(
+            f2, placeholder_text="**************", show="*"
+        )
         l3.grid(row=0, column=0, sticky="w", padx=(20, 0))
         l4.grid(row=1, column=0, sticky="w", padx=(20, 0))
         l5.grid(row=2, column=0, sticky="w", padx=(20, 0))
@@ -128,8 +131,8 @@ class RegisterView:
         self.password_confirm_entry.grid(row=3, column=1, sticky="we", padx=(0, 20))
 
         # create buttons
-        b1 = CTkButton(f2, text="Rekisteröidy")
-        b2 = CTkButton(f2, text="Onko sinulla jo käyttäjä?", command=self.login_view)
+        b1 = CTkButton(f2, text="Rekisteröidy", command=self.register)
+        b2 = CTkButton(f2, text="← Takaisin", command=self.login_view, fg_color="gray")
         b1.grid(row=4, column=0, sticky="we", padx=15)
         b2.grid(row=4, column=1, sticky="we", padx=15)
 

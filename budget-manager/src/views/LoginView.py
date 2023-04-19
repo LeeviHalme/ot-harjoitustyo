@@ -41,13 +41,13 @@ class LoginView:
         # if login wasn't successful
         if not success:
             tkinter.messagebox.showerror(
-                title="Oops!", message="Väärä käyttäjätunnus tai salasana."
+                title="Hups!", message="Väärä käyttäjätunnus tai salasana."
             )
             return
 
         # redirect to budgets view
         user = self.repository.get_session()
-        print("LOGIN SUCCESS", user)
+        print("LOGIN SUCCESS:", user)
 
     def pack(self):
         self.frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
@@ -56,7 +56,7 @@ class LoginView:
         self.frame.destroy()
 
     def init(self):
-        self.frame = CTkFrame(self.window)
+        self.frame = CTkFrame(self.window, fg_color="transparent")
 
         # configure layout
         self.frame.columnconfigure(0, weight=2)
@@ -96,7 +96,7 @@ class LoginView:
         l3 = CTkLabel(f2, text="Käyttäjätunnus")
         l4 = CTkLabel(f2, text="Salasana")
         self.username_entry = CTkEntry(f2, placeholder_text="mattimeika")
-        self.password_entry = CTkEntry(f2, placeholder_text="**************")
+        self.password_entry = CTkEntry(f2, placeholder_text="**************", show="*")
         l3.grid(row=0, column=0, sticky="w", padx=(20, 0))
         l4.grid(row=1, column=0, sticky="w", padx=(20, 0))
         self.username_entry.grid(row=0, column=1, sticky="we", padx=(0, 20))
@@ -104,7 +104,9 @@ class LoginView:
 
         # create buttons
         b1 = CTkButton(f2, text="Kirjaudu", command=self.login)
-        b2 = CTkButton(f2, text="Rekisteröidy", command=self.register_view)
+        b2 = CTkButton(
+            f2, text="Rekisteröidy", command=self.register_view, fg_color="gray"
+        )
         b1.grid(row=2, column=0, sticky="we", padx=15)
         b2.grid(row=2, column=1, sticky="we", padx=15)
 
