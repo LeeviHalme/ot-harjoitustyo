@@ -9,3 +9,10 @@
 - Lisätty ensimmäinen käyttöliittymänäkymä: *Kirjaudu sisään*
 - Päätetty kansiorakenteesta seuraavaa: näkymät sijoitetaan kansion `views/` alle
 - Ei vielä testejä kirjoitettuna, koska ei ole mielekästä testata käyttöliittymäluokkia. Tulevilla viikoilla lisätään sovelluslogiikkaa, joille voi kirjoittaa jo testejä.
+
+## Viikko 4
+- Aloitettu sovelluksen toiminnallisuudet:
+  - Tietokantayhteys SQLite-tietokantaan
+  - Sovelluslogiikka, sekä käyttöliittymälogiikka autentikoinnille
+    - Lisätty uusi käyttöliittymänäkymä *Rekisteröidy*
+    - Refaktoroitu sovellus käyttämään repositorio-suunnittelumallia
