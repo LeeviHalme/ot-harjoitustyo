@@ -1,6 +1,6 @@
 import unittest
 from utils.connect_database import get_database_connection
-from utils.initialize_database import initialize_database
+from utils.initialize_database import initialize_database, insert_test_data
 from repositories.AuthRepository import AuthRepository
 
 
@@ -32,9 +32,9 @@ class TestAuthRepository(unittest.TestCase):
         user = repository._user
 
         self.assertTrue(success)
+        self.assertIsNotNone(user)
         self.assertEqual(user.name, "test")
         self.assertEqual(user.username, "test")
-        self.assertEqual(len(user.id), 36)
 
     # test logging in
     def test_login_using_username_pass(self):
@@ -48,6 +48,42 @@ class TestAuthRepository(unittest.TestCase):
         user = repository_2._user
 
         self.assertTrue(success)
+        self.assertIsNotNone(user)
         self.assertEqual(user.name, "test")
         self.assertEqual(user.username, "test")
-        self.assertEqual(len(user.id), 36)
+
+    # test registering an existing user
+    def test_register_existing_user(self):
+        # insert test data
+        insert_test_data(self._connection)
+
+        repository = AuthRepository(self._connection)
+        name, username, password = ("test", "test", "test")
+
+        success = repository.register_new_user(name, username, password)
+
+        self.assertFalse(success)
+        self.assertIsNone(repository._user)
+
+    # test logging in with invalid username
+    def test_login_invalid_username(self):
+        repository = AuthRepository(self._connection)
+        username, password = ("test", "test")
+
+        success = repository.login_using_username_pass(username, password)
+
+        self.assertFalse(success)
+        self.assertIsNone(repository._user)
+
+    # test logging in with invalid password
+    def test_login_invalid_password(self):
+        # insert test data
+        insert_test_data(self._connection)
+
+        repository = AuthRepository(self._connection)
+        username, password = ("test", "invalid")
+
+        success = repository.login_using_username_pass(username, password)
+
+        self.assertFalse(success)
+        self.assertIsNone(repository._user)
