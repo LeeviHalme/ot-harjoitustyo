@@ -3,16 +3,16 @@ Harjoitustyölle ja laskareille varattu git-repositorio.
 <br />
 This repository contains weekly excercises as well as the main project files for University of Helsinki's **TKT20002 Software Development Methods**.
 
-# Budget Managing Application
-## Features and development plan
-Feature list as well as development plan and personal timekeeping can be found on the repository root.
+## Budget Managing Application
+
+Hallitse talouttasi tehokkaasti budjetointisovelluksen avulla. Voit lisätä henkilökohtaiseen budjettiisi koko kuukauden menot, tulot ja yllättävät kulut. Voit myös hallita useita budjetteja samalla käyttäjällä.
 
 ### Quick links
 - [Requirements Specification](/dokumentaatio/VAATIMUSMAARITTELY.md)
 - [Hourly Accounting](/dokumentaatio/TUNTIKIRJANPITO.md)
 - [Changelog](/dokumentaatio/CHANGELOG.md)
 
-## Local Setup
+### Local Setup
 ```sh
 git clone git@github.com:LeeviHalme/ot-harjoitustyo.git
 ```
