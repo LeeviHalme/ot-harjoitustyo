@@ -1,4 +1,6 @@
-from connect_database import get_database_connection
+from utils.connect_database import get_database_connection
+from repositories.UserRepository import User
+from repositories.AuthRepository import AuthRepository
 
 
 # drop all existing tables
@@ -44,6 +46,35 @@ def create_tables(connection):
     connection.commit()
 
 
+# insert testing data
+def insert_test_data(connection):
+    cursor = connection.cursor()
+
+    # insert user
+    user_id = User.generate_id()
+    repo = AuthRepository(connection)
+    hash = repo._generate_password_hash(password="test")
+    cursor.execute(
+        """
+        insert into users (id, name, username, password_hash)
+        values (:id, 'TestAccount', 'test', :hash)
+        """,
+        {"id": user_id, "hash": hash},
+    )
+
+    # insert budget
+    budget_id = User.generate_id()
+    cursor.execute(
+        """
+        insert into budgets (id, name, description, user_id)
+        values (:id, 'TestBudget', 'Test', :user_id)
+        """,
+        {"id": budget_id, "user_id": user_id},
+    )
+
+    connection.commit()
+
+
 # initialize db, drop and create
 def initialize_database():
     connection = get_database_connection()
@@ -52,5 +83,5 @@ def initialize_database():
     create_tables(connection)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     initialize_database()
