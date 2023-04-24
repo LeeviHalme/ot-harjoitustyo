@@ -6,4 +6,6 @@
 | 3.4.  | 3    | tkinterin opettelua ja ensimmäisen kirjautumisnäkymän tekoa |
 | 17.4. | 3    | lisää tkinterin, sekä customtkinterin opettelua |
 | 18.4. | 4    | SQLite tietokantayhteys, autentikaatio, sekä tyylikorjauksia |
-| yht   | 13   |  | 
+| 23.4. | 3    | testien kirjoittamista, sekä korjauksia reflektoiden edellisen viikon palauttetta  |
+| 24.4. | 3    | sovelluksen diagrammien tekoa, sekä arkkitehtuuridokumenttien kirjoittamista  |
+| yht   | 19   |  | 
