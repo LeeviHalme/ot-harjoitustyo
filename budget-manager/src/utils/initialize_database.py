@@ -1,6 +1,4 @@
-from utils.connect_database import get_database_connection
-from repositories.UserRepository import User
-from repositories.AuthRepository import AuthRepository
+from connect_database import get_database_connection
 
 
 # drop all existing tables
@@ -48,6 +46,9 @@ def create_tables(connection):
 
 # insert testing data
 def insert_test_data(connection):
+    from repositories.UserRepository import User
+    from repositories.AuthRepository import AuthRepository
+
     cursor = connection.cursor()
 
     # insert user

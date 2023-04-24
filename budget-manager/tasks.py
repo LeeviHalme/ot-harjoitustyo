@@ -7,6 +7,12 @@ def start(ctx):
     ctx.run("python3 src/index.py", pty=True)
 
 
+# alusta tietokanta
+@task
+def init_db(ctx):
+    ctx.run("python3 src/utils/initialize_database.py", pty=True)
+
+
 # suorita testit src/tests kansiosta
 @task
 def test(ctx):
