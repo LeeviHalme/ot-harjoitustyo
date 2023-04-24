@@ -1,6 +1,6 @@
 import unittest
 from utils.connect_database import get_database_connection
-from utils.initialize_database import initialize_database, insert_test_data
+from utils.initialize_test_database import initialize_database, insert_test_data
 from repositories.AuthRepository import AuthRepository
 
 
@@ -55,7 +55,7 @@ class TestAuthRepository(unittest.TestCase):
     # test registering an existing user
     def test_register_existing_user(self):
         # insert test data
-        insert_test_data(self._connection)
+        insert_test_data()
 
         repository = AuthRepository(self._connection)
         name, username, password = ("test", "test", "test")
@@ -78,7 +78,7 @@ class TestAuthRepository(unittest.TestCase):
     # test logging in with invalid password
     def test_login_invalid_password(self):
         # insert test data
-        insert_test_data(self._connection)
+        insert_test_data()
 
         repository = AuthRepository(self._connection)
         username, password = ("test", "invalid")

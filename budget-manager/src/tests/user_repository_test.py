@@ -1,6 +1,6 @@
 import unittest
 from utils.connect_database import get_database_connection
-from utils.initialize_database import initialize_database, insert_test_data
+from utils.initialize_test_database import initialize_database, insert_test_data
 from repositories.UserRepository import UserRepository
 
 
@@ -9,7 +9,7 @@ class TestUserRepository(unittest.TestCase):
         # setup db connection
         initialize_database()
         self._connection = get_database_connection()
-        insert_test_data(self._connection)
+        insert_test_data()
 
     # test get user by username
     def test_get_by_username(self):
