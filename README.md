@@ -42,10 +42,10 @@ Starting the TkInter's ui can be done by running:
 poetry run invoke start
 ```
 
-#### Initializing databse
+#### Initializing database
 Initializing the database and creating tables can be done by running:
 ```
-poetry run invoke start
+poetry run invoke init-db
 ```
 *NOTE: This will _erase_ all existing data stored in the database*
 
