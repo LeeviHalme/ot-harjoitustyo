@@ -5,11 +5,11 @@ from repositories.AuthRepository import AuthRepository
 
 
 class LoginView:
-    def __init__(self, window, show_register, show_budgets) -> None:
+    def __init__(self, window, show_register, add_session) -> None:
         self.window = window
         self.frame = None
         self.register_view = show_register
-        self.budgets_view = show_budgets
+        self.add_session = add_session
 
         # declare repositories
         connection = get_database_connection()
@@ -36,7 +36,7 @@ class LoginView:
         password = self.password_entry.get()
 
         # use repository method
-        success = self.repository.loginUsingUsernamePass(username, password)
+        success = self.repository.login_using_username_pass(username, password)
 
         # if login wasn't successful
         if not success:
@@ -45,9 +45,9 @@ class LoginView:
             )
             return
 
-        # redirect to budgets view
-        user = self.repository.get_session()
-        print("LOGIN SUCCESS:", user)
+        # add session and redirect to budgets view
+        session = self.repository.get_session()
+        self.add_session(session)
 
     def pack(self):
         self.frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")

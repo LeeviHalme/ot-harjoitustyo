@@ -51,7 +51,7 @@ class RegisterView:
             return
 
         # use repository method
-        success = self.repository.registerNewUser(name, username, password)
+        success = self.repository.register_new_user(name, username, password)
 
         # if register wasn't successful
         if not success:
@@ -61,9 +61,12 @@ class RegisterView:
             )
             return
 
-        # redirect to budgets view
-        user = self.repository.get_session()
-        print("REGISTER SUCCESS:", user)
+        # redirect to login view
+        tkinter.messagebox.showinfo(
+            title="Rekisteröinti onnistui!",
+            message="Käyttäjätili luotu. Voit nyt kirjautua sisään.",
+        )
+        self.login_view()
 
     def pack(self):
         self.frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
