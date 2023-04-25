@@ -16,3 +16,16 @@
   - Sovelluslogiikka, sekä käyttöliittymälogiikka autentikoinnille
     - Lisätty uusi käyttöliittymänäkymä *Rekisteröidy*
     - Refaktoroitu sovellus käyttämään repositorio-suunnittelumallia
+
+## Viikko 5
+- Lisätty testit jokaiseen repositorioon
+- Korjattu puuttuneet toiminnallisuudet edellisen viikon vaatimiksi
+- Eriytetty olio-luokat "entities"-kansioon
+- Lisätty jokaisen repositorion ja niiden aliluokkien luokkakaaviot
+- Lisätty kirjautumista kuvaava sekvenssikaavio
+- Luotu uusi käyttöliittymänäkymä *Päänäkymä*
+- Luotu uusi repositorio ja entity vastaamaan budjettitoiminnallisuutta
+- Lisätty wizard-tyylinen kysely budjettien luonnille
+- Budjetin tarkastelu _ei vielä valmis_. Tulossa seuraavaan releaseen
+- Otettu pylint käyttöön
+- Kattavuusraportin generointi tulisi nyt onnistua

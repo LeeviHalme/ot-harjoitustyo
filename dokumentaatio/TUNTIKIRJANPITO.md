@@ -8,4 +8,5 @@
 | 18.4. | 4    | SQLite tietokantayhteys, autentikaatio, sekä tyylikorjauksia |
 | 23.4. | 3    | testien kirjoittamista, sekä korjauksia reflektoiden edellisen viikon palauttetta  |
 | 24.4. | 3    | sovelluksen diagrammien tekoa, sekä arkkitehtuuridokumenttien kirjoittamista  |
-| yht   | 19   |  | 
+| 25.4. | 1.5    | uuden käyttöliittymänäkymän tekoa, sekä budjetti-sovelluslogiikan tekoa |
+| yht   | 20.5   |  | 
