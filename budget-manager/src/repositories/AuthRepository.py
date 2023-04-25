@@ -10,7 +10,7 @@ class AuthRepository:
         self.user_repository = UserRepository(connection)
 
     # get user session
-    def get_session(self):
+    def get_session(self) -> User | None:
         return self._user
 
     # validate hash and pass
