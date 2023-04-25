@@ -8,6 +8,7 @@ This repository contains weekly excercises as well as the main project files for
 **Description (fi-FI):** Hallitse talouttasi tehokkaasti budjetointisovelluksen avulla. Voit lisätä henkilökohtaiseen budjettiisi koko kuukauden menot, tulot ja yllättävät kulut. Voit myös hallita useita budjetteja samalla käyttäjällä.
 
 ### Quick links
+- [Latest Release](/releases/latest)
 - [Requirements Specification](/dokumentaatio/VAATIMUSMAARITTELY.md)
 - [Hourly Accounting](/dokumentaatio/TUNTIKIRJANPITO.md)
 - [Changelog](/dokumentaatio/CHANGELOG.md)
