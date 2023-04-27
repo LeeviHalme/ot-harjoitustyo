@@ -1,3 +1,4 @@
+from sqlite3 import Error as SQLError
 from entities.Budget import Budget
 
 
@@ -33,7 +34,8 @@ class BudgetRepository:
             row = cursor.fetchone()
 
             return Budget(row["id"], row["name"], row["description"], row["user_id"])
-        except:
+        except SQLError as error:
+            print(error)
             return None
 
     # create a new budget
@@ -57,5 +59,6 @@ class BudgetRepository:
             self._connection.commit()
 
             return Budget(budget_id, name, description, user_id)
-        except:
+        except SQLError as error:
+            print(error)
             return None

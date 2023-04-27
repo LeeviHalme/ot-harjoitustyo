@@ -16,21 +16,21 @@ class AuthRepository:
     # validate hash and pass
     def _validate_password_hash(self, hashed: str, password: str) -> bool:
         # encoding user password
-        bytes = password.encode("utf-8")
+        pwd_bytes = password.encode("utf-8")
         hash_bytes = hashed.encode("utf-8")
 
         # checking password and return boolean
-        return bcrypt.checkpw(bytes, hash_bytes)
+        return bcrypt.checkpw(pwd_bytes, hash_bytes)
 
     # hash given password
     def _generate_password_hash(self, password: str) -> str:
         # encoding user password
-        bytes = password.encode("utf-8")
+        pwd_bytes = password.encode("utf-8")
 
         # generating the salt
         salt = bcrypt.gensalt()
 
-        pw_hash = bcrypt.hashpw(bytes, salt)
+        pw_hash = bcrypt.hashpw(pwd_bytes, salt)
 
         # Hashing the password
         return pw_hash.decode("utf-8")
@@ -44,9 +44,9 @@ class AuthRepository:
             return False
 
         # hash user password
-        hash = self._generate_password_hash(password)
+        hashed = self._generate_password_hash(password)
 
-        self.user_repository.create_new_user(name, username, hash)
+        self.user_repository.create_new_user(name, username, hashed)
 
         # get user from db and store in state
         user = self.user_repository.get_by_username(username)
