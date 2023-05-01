@@ -58,10 +58,10 @@ def initialize_database():
     # with __name__ == "main" this is the correct way to import without
     # the tests breaking
 
-    # pylint: disable=import-error
+    # pylint: disable=import-error,import-outside-toplevel
     from connect_database import get_database_connection
 
-    # pylint: enable=import-error
+    # pylint: enable=import-error,import-outside-toplevel
 
     connection = get_database_connection()
 
