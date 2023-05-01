@@ -19,6 +19,12 @@ def test(ctx):
     ctx.run("pytest src", pty=True)
 
 
+# koodin staattinen analysointi
+@task
+def lint(ctx):
+    ctx.run("pylint src", pty=True)
+
+
 # luo testien kattavuustulokset
 @task
 def coverage(ctx):
