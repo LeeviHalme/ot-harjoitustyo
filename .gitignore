@@ -4,4 +4,3 @@ __pycache__
 htmlcov
 .vscode
 *.sqlite
-data
