@@ -1,5 +1,10 @@
 # drop all existing tables
 def drop_tables(connection):
+    """Drop all existing data from database
+
+    Args:
+        connection: Database connection
+    """
     cursor = connection.cursor()
 
     # drop tables
@@ -11,6 +16,11 @@ def drop_tables(connection):
 
 # create tables
 def create_tables(connection):
+    """Create initial tables
+
+    Args:
+        connection: Database connection
+    """
     cursor = connection.cursor()
 
     # create users table
@@ -43,6 +53,7 @@ def create_tables(connection):
 
 # initialize db, drop and create
 def initialize_database():
+    """Initialize database by running the drop and create table-commands"""
     # pylint is disabled for below line because when running the file
     # with __name__ == "main" this is the correct way to import without
     # the tests breaking

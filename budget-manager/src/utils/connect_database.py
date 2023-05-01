@@ -9,4 +9,9 @@ connection.row_factory = sqlite3.Row
 
 
 def get_database_connection():
+    """Get current active database connection
+
+    Returns:
+        connection: SQLite connection object (refer to sqlite3 documentation)
+    """
     return connection

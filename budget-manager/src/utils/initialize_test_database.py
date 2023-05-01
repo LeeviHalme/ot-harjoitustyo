@@ -1,11 +1,14 @@
 from utils.connect_database import get_database_connection
 from utils.initialize_database import drop_tables, create_tables
-from repositories.UserRepository import User
 from repositories.AuthRepository import AuthRepository
+from repositories.BudgetRepository import BudgetRepository
 
 
 # initialize db, drop and create
 def initialize_database():
+    """Initialize database by dropping existing tables
+    (data) and creating new empty tables
+    """
     connection = get_database_connection()
 
     drop_tables(connection)
@@ -14,29 +17,16 @@ def initialize_database():
 
 # insert testing data
 def insert_test_data():
+    """Inserts data to the db in order to perform tests
+    on the repository methods
+    """
     connection = get_database_connection()
-    cursor = connection.cursor()
+    auth_repository = AuthRepository(connection)
+    budget_repository = BudgetRepository(connection)
 
     # insert user
-    user_id = User.generate_id()
-    repo = AuthRepository(connection)
-    hash = repo._generate_password_hash(password="test")
-    cursor.execute(
-        """
-        insert into users (id, name, username, password_hash)
-        values (:id, 'TestAccount', 'test', :hash)
-        """,
-        {"id": user_id, "hash": hash},
-    )
+    auth_repository.register_new_user("Testaaja Teppo", "test", "test")
+    user = auth_repository.get_session()
 
     # insert budget
-    budget_id = User.generate_id()
-    cursor.execute(
-        """
-        insert into budgets (id, name, description, user_id)
-        values (:id, 'TestBudget', 'Test', :user_id)
-        """,
-        {"id": budget_id, "user_id": user_id},
-    )
-
-    connection.commit()
+    budget_repository.create_budget("Test Budget", "Example description", user.id)
