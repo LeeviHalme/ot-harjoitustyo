@@ -1,6 +1,6 @@
+import bcrypt
 from repositories.UserRepository import UserRepository
 from entities.User import User
-import bcrypt
 
 
 class AuthRepository:

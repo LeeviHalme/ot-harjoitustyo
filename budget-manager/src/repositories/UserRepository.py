@@ -55,5 +55,3 @@ class UserRepository:
         )
 
         self._connection.commit()
-
-        return
