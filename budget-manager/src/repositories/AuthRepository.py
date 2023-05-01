@@ -4,6 +4,14 @@ import bcrypt
 
 
 class AuthRepository:
+    """Class used to authenticate users
+
+    Attributes:
+        _user: User in session
+        _connection: Database connection
+        user_repository: Reference to a UserRepository instance
+    """
+
     def __init__(self, connection) -> None:
         self._user = None
         self._connection = connection
@@ -11,6 +19,11 @@ class AuthRepository:
 
     # get user session
     def get_session(self) -> User | None:
+        """Returns the current user in session
+
+        Returns:
+            User | None: User in session, or None if no session
+        """
         return self._user
 
     # validate hash and pass
@@ -38,6 +51,16 @@ class AuthRepository:
     # register a new user
     # returns boolean status flag
     def register_new_user(self, name: str, username: str, password: str) -> bool:
+        """Registers a new user
+
+        Args:
+            name (str): User's name
+            username (str): User's username
+            password (str): User's plaintext password
+
+        Returns:
+            bool: Whether the creation was successful
+        """
         # check if user exists
         user = self.user_repository.get_by_username(username)
         if user:
@@ -57,6 +80,15 @@ class AuthRepository:
     # login using username and password
     # returns boolean status flag
     def login_using_username_pass(self, username: str, password: str) -> bool:
+        """Login to an existing account with username and password
+
+        Args:
+            username (str): Input username
+            password (str): Input password
+
+        Returns:
+            bool: Whether login was successful
+        """
         # check if user doesn't exist
         user = self.user_repository.get_by_username(username)
         if not user:
