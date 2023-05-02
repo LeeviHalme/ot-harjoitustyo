@@ -52,6 +52,12 @@ class BudgetsView:
         name = self.prompt_name()
         description = self.prompt_description()
 
+        if not name or not description:
+            tkinter.messagebox.showinfo(
+                title="Hups!", message="Nimi tai kuvaus eivät saa olla tyhjiä"
+            )
+            return
+
         # TODO: Add validation
 
         # create new budget
