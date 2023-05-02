@@ -9,6 +9,7 @@ TBA...
 ## Kirjautuminen
 *Kirjaudu sisään*-näkymästä on mahdollista siirtyä *Rekisteröidy*-näkymään painamalla "Rekisteröidy" painiketta.
 Voit kirjautua sisään syöttämällä käyttäjätunnuksesi ja salasanasi syötekenttiin ja painamalla "Kirjaudu"-painiketta. 
+
 ![kirjautuminen](images/login_example.png)
 
 Jos kirjautuminen onnistuu, ohjataan käyttäjä *Päänäkymään*.
