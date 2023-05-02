@@ -1,6 +1,16 @@
 # Sovelluksen arkkitehtuurikuvaus
 Rakenteessa noudatetaan kaksitasoista kerrosarkkitehtuuria ja sovelluksen pakkausrakenne on seuraava:
-![pakkausrakenne](package_diagram.png)
+![pakkausrakenne](images/package_diagram.png)
+
+
+## Hakemistojen kuvaukset
+- `data`- Sisältää tietokantaan liittyvät tiedostot
+- `src`- Sisältää sovelluksen lähdekoodin
+  - `entities`- Sisältää yleisesti käytettyjä olioita, jotka kuvastavat sovelluksen tietorakenteita
+  - `repositories`- Sisältää repositoriot, joiden kautta käyttöliittymä muokkaa ja hakee dataa 
+  - `tests`- Sisältää sovelluksen automaattiset yksikkötestit
+  - `utils`- Sisältää "apuvälineitä" eli metodeja joita käytetään useasti ja monesta moduulista
+  - `views`- Sisältää käyttöliittymänäkymät
 
 ## Päätoiminnallisuudet
 
