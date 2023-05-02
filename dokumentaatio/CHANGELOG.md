@@ -39,5 +39,5 @@
   - Päätetty, että ei enää tässä vaiheessa tehdä uutta näkymää budjetin muokkaukselle, vaan muokkaus tapahtuu samalla logiikalla, kuin uuden budjetin luonti
 - Budjetin muokkaus-ominaisuus valmis :heavy_check_mark:
 - Poistettu uudemman python-version ominaisuuksia (liitostyypit), jotta sovellus toimisi alemmilla versioilla
-  - Ikävä kyllä en pystynyt testaamaan sovellusta virtuaaliympäristössä (jää ikuisesti pyörimään "ladataan" näyttöön) ja aika ei riittänyt etsimään vaihtoehtoisia testauskeinoja, joten varmuutta yhteensopivuudesta ei ole.
+  - Ikävä kyllä en pystynyt testaamaan sovellusta virtuaalityöasemalla (jää ikuisesti pyörimään "ladataan" näyttöön) ja aika ei riittänyt etsimään vaihtoehtoisia testauskeinoja, joten varmuutta yhteensopivuudesta ei ole.
 - Lisätty dokumentaatiota ja eriytetty kuvat omaan kansioon
