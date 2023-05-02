@@ -17,6 +17,6 @@ class TestUserRepository(unittest.TestCase):
         result = repository.get_by_username("test")
 
         self.assertIsNotNone(result)
-        self.assertEqual(result["name"], "TestAccount")
+        self.assertEqual(result["name"], "Testaaja Teppo")
         self.assertEqual(result["username"], "test")
         self.assertEqual(len(result["password_hash"]), 60)
