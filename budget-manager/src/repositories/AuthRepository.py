@@ -18,7 +18,7 @@ class AuthRepository:
         self.user_repository = UserRepository(connection)
 
     # get user session
-    def get_session(self) -> User | None:
+    def get_session(self) -> User:
         """Returns the current user in session
 
         Returns:
