@@ -1,6 +1,7 @@
 from views.LoginView import LoginView
 from views.RegisterView import RegisterView
 from views.BudgetsView import BudgetsView
+from views.BudgetSummaryView import BudgetSummaryView
 
 
 class UI:
@@ -27,8 +28,16 @@ class UI:
         self.show_login()
 
     # show singular budget page
-    def view_budget(self) -> None:
-        pass
+    def view_budget(self, budget_id: str) -> None:
+        view = BudgetSummaryView(
+            self.window,
+            logout=self.delete_session,
+            show_budgets=self.show_budgets,
+            repack=lambda: self.view_budget(budget_id),
+            user=self.user,
+            budget_id=budget_id,
+        )
+        self.switch_view(view)
 
     # show budgets view
     def show_budgets(self) -> None:
@@ -55,6 +64,23 @@ class UI:
         view = RegisterView(self.window, show_login=self.show_login)
         self.switch_view(view)
 
+    # automatically login with test account
+    # only to be used in development
+    def __auto_login(self):
+        from utils.connect_database import get_database_connection
+        from repositories.AuthRepository import AuthRepository
+
+        connection = get_database_connection()
+        repository = AuthRepository(connection)
+        success = repository.login_using_username_pass("leehalme", "testi")
+        if not success:
+            return print("AUTO-LOGIN FAILED")
+        user = repository.get_session()
+        self.add_session(user)
+
     def start(self) -> None:
+        # Only in development
+        # self.__auto_login()
+
         # on init, show login screen
         self.show_login()

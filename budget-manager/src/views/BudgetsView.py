@@ -110,20 +110,15 @@ class BudgetsView:
                 # add row to container
                 f2.rowconfigure(index, weight=1)
 
-            # bruh
-            for index, budget in enumerate(user_budgets):
                 # create frame for budget
                 fx = CTkFrame(f2)
                 fx.columnconfigure(0, weight=1)
                 fx.columnconfigure(1, weight=1)
                 fx.rowconfigure(0, weight=1)
-                lx = CTkLabel(
-                    fx,
-                    text=budget.name,
-                    # text_color="white",
-                )
+                lx = CTkLabel(fx, text=budget.name)
+
                 bx = CTkButton(
-                    fx, text="Tarkastele (tulossa)", fg_color="gray", state="disabled"
+                    fx, text="Avaa →", command=lambda: self.view_budget(budget.id)
                 )
                 lx.grid(row=0, column=0, pady=15, sticky="w", padx=(20, 0))
                 bx.grid(row=0, column=1, sticky="e", pady=15, padx=(0, 20))
