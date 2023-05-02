@@ -13,6 +13,7 @@ This repository contains weekly excercises as well as the main project files for
 - [Hourly Accounting](/dokumentaatio/TUNTIKIRJANPITO.md)
 - [Changelog](/dokumentaatio/CHANGELOG.md)
 - [Architecture Description](/dokumentaatio/ARKKITEHTUURI.md)
+- [Usage Guide](/dokumentaatio/KAYTTOOHJE.md)
 
 ### Local Setup
 1. Copy the project from github:
