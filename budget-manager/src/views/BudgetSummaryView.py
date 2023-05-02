@@ -266,6 +266,7 @@ class BudgetSummaryView:
                 f12,
                 text='Sinulla ei ole tapahtumia. Lisää tapahtumia painamalla "Muuta menoja/tuloja/kuluja"',
                 text_color="gray",
+                wraplength=200,
             )
             lx.grid(row=1, column=0)
         else:
