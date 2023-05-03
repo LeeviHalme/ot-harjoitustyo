@@ -5,6 +5,23 @@ from repositories.AuthRepository import AuthRepository
 
 
 class LoginView:
+    """Class used to show login view
+
+    Attributes:
+        window (Ctk):                   CustomTkInter Main Window
+        frame (CtkFrame | None):        Root frame for this view
+
+        register_view (function):       Show RegisterView
+        add_session (function):         Add user session to UI state
+
+        repository (AuthRepository):    Authentication repository instance
+
+        title (str):                    Title shown on the page
+        subtitle (str):                 Subtitle shown on the page
+        username_entry (CtkEntry):      State variable for username input
+        password_entry (CtkEntry):      State variable for password input
+    """
+
     def __init__(self, window, show_register, add_session) -> None:
         self.window = window
         self.frame = None
@@ -17,7 +34,6 @@ class LoginView:
 
         # declare text variables
         self.title = "Budjetointisovellus"
-        # self.subtitle = "Hallitse talouttasi budjetointisovelluksen avulla. "
         self.subtitle = "Hallitse talouttasi tehokkaasti budjetointisovelluksen avulla. Voit lisätä henkilökohtaiseen budjettiisi koko kuukauden menot, tulot ja yllättävät kulut. Voit myös hallita useita budjetteja samalla käyttäjällä."
 
         # declare state
@@ -28,6 +44,7 @@ class LoginView:
 
     # login user using local auth
     def login(self):
+        """Button click handler for logging in"""
         if not self.username_entry or not self.password_entry:
             return
 
@@ -50,12 +67,15 @@ class LoginView:
         self.add_session(session)
 
     def pack(self):
+        """Pack (use grid) the current frame into the window"""
         self.frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
 
     def destroy(self):
+        """Destroy current frame"""
         self.frame.destroy()
 
     def init(self):
+        """Main method to draw and initiate the view"""
         self.frame = CTkFrame(self.window, fg_color="transparent")
 
         # configure layout

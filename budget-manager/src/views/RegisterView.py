@@ -5,6 +5,24 @@ from repositories.AuthRepository import AuthRepository
 
 
 class RegisterView:
+    """Class used to show login view
+
+    Attributes:
+        window (Ctk):                       CustomTkInter Main Window
+        frame (CtkFrame | None):            Root frame for this view
+
+        login_view (function):              Show LoginView
+
+        repository (AuthRepository):        Authentication repository instance
+
+        title (str):                        Title shown on the page
+        subtitle (str):                     Subtitle shown on the page
+        name_entry (CtkEntry):              State variable for name input
+        username_entry (CtkEntry):          State variable for username input
+        password_entry (CtkEntry):          State variable for password input
+        password_confirm_entry (CtkEntry):  State variable for password confirmation input
+    """
+
     def __init__(self, window, show_login) -> None:
         self.window = window
         self.frame = None
@@ -29,6 +47,7 @@ class RegisterView:
 
     # register user using local auth
     def register(self):
+        """Button click handler for registering a new user"""
         if (
             not self.name_entry
             or not self.username_entry
@@ -69,12 +88,15 @@ class RegisterView:
         self.login_view()
 
     def pack(self):
+        """Pack (use grid) the current frame into the window"""
         self.frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
 
     def destroy(self):
+        """Destroy current frame"""
         self.frame.destroy()
 
     def init(self):
+        """Main method to draw and initiate the view"""
         self.frame = CTkFrame(self.window, fg_color="transparent")
 
         # configure layout

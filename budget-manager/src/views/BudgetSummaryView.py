@@ -11,6 +11,22 @@ from repositories.BudgetRepository import BudgetRepository
 
 
 class BudgetSummaryView:
+    """Class used to show budget summary view
+
+    Attributes:
+        window (Ctk):                   CustomTkInter Main Window
+        frame (CtkFrame | None):        Root frame for this view
+        user (User):                    User in session
+
+        budget_id (str):                Currently viewed budget's UID
+        budget (Budget | None):         Parsed budget object from DB
+
+        logout (function):              Method to log user out
+        show_budgets (function):        Show budgets view
+        repack (function):              Repack the frame (destroy and pack)
+        repository (BudgetRepository):  Budget repository instance
+    """
+
     def __init__(self, window, user, logout, show_budgets, repack, budget_id) -> None:
         self.window = window
         self.frame = None
@@ -27,18 +43,22 @@ class BudgetSummaryView:
         connection = get_database_connection()
         self.repository = BudgetRepository(connection)
 
-        # declare state
-        self.username_entry = None
-
         self.init()
 
     def pack(self):
+        """Pack (use grid) the current frame into the window"""
         self.frame.grid(row=0, column=0, sticky="nsew")
 
     def destroy(self):
+        """Destroy current frame"""
         self.frame.destroy()
 
-    def prompt_name(self):
+    def prompt_name(self) -> str:
+        """Prompt the user to enter a name
+
+        Returns:
+            string | None: Name from the popup
+        """
         # prompt budget name
         name_dialog = CTkInputDialog(
             text="Syötä uusi nimi (max 50 merkkiä):",
@@ -47,7 +67,12 @@ class BudgetSummaryView:
 
         return name_dialog.get_input() or None
 
-    def prompt_description(self):
+    def prompt_description(self) -> str:
+        """Prompt the user to enter a description
+
+        Returns:
+            string | None: Description from the popup
+        """
         description_dialog = CTkInputDialog(
             text="Syötä uusi kuvaus (max 100 merkkiä):",
             title=f"Muokkaa budjettia {self.budget.name} - Syötä kuvaus",
@@ -57,6 +82,7 @@ class BudgetSummaryView:
 
     # enter new values for budget
     def edit_budget(self):
+        """Button click handler for editing the budget details"""
         if not self.budget:
             return
 
@@ -91,6 +117,7 @@ class BudgetSummaryView:
         self.repack()
 
     def init(self):
+        """Main method to draw and initiate the view"""
         self.frame = CTkFrame(self.window, fg_color="transparent")
 
         # get budget by id
