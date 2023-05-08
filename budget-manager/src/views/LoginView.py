@@ -52,6 +52,13 @@ class LoginView:
         username = self.username_entry.get()
         password = self.password_entry.get()
 
+        # loose validation that values exist
+        if not username or not password:
+            tkinter.messagebox.showinfo(
+                title="Hups!", message="Käyttäjänimi tai salasana eivät saa olla tyhjiä"
+            )
+            return
+
         # use repository method
         success = self.repository.login_using_username_pass(username, password)
 
