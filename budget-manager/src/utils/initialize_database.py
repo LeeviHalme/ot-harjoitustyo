@@ -10,6 +10,7 @@ def drop_tables(connection):
     # drop tables
     cursor.execute("drop table if exists users;")
     cursor.execute("drop table if exists budgets;")
+    cursor.execute("drop table if exists transactions;")
 
     connection.commit()
 
@@ -44,6 +45,19 @@ def create_tables(connection):
             description VARCHAR(100) NOT NULL,
             user_id TEXT NOT NULL,
             FOREIGN KEY(user_id) REFERENCES users(id)
+        );
+    """
+    )
+
+    # create transactions table
+    cursor.execute(
+        """
+        create table transactions (
+            id TEXT NOT NULL PRIMARY KEY,
+            name VARCHAR(100) NOT NULL,
+            amount_cents INT NOT NULL,
+            budget_id TEXT NOT NULL,
+            FOREIGN KEY(budget_id) REFERENCES budgets(id)
         );
     """
     )
