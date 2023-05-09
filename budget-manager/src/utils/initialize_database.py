@@ -56,6 +56,7 @@ def create_tables(connection):
             id TEXT NOT NULL PRIMARY KEY,
             name VARCHAR(100) NOT NULL,
             amount_cents INT NOT NULL,
+            due_at TIMESTAMP NOT NULL,
             budget_id TEXT NOT NULL,
             FOREIGN KEY(budget_id) REFERENCES budgets(id)
         );
