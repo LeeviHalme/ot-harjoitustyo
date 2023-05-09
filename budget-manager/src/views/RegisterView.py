@@ -69,6 +69,14 @@ class RegisterView:
             )
             return
 
+        # loose validation that values exist
+        if not name or not username or not password:
+            tkinter.messagebox.showinfo(
+                title="Hups!",
+                message="Nimi, käyttäjänimi tai salasana eivät saa olla tyhjiä",
+            )
+            return
+
         # use repository method
         success = self.repository.register_new_user(name, username, password)
 
