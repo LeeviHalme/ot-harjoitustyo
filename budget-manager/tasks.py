@@ -7,6 +7,13 @@ def start(ctx):
     ctx.run("python3 src/index.py", pty=True)
 
 
+# käynnistä sovellus kehitysympäristössä
+# (kirjaa automaattisesti testikäyttäjän sisään)
+@task
+def start_dev(ctx):
+    ctx.run("python3 src/index.py --autologin", pty=True)
+
+
 # alusta tietokanta
 @task
 def init_db(ctx):

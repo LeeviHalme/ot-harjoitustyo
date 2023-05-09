@@ -1,3 +1,4 @@
+import sys
 from views.LoginView import LoginView
 from views.RegisterView import RegisterView
 from views.BudgetsView import BudgetsView
@@ -9,6 +10,11 @@ class UI:
         self.window = window
         self.current_view = None
         self.user = None
+        self.auto_login = False
+
+        # check for cli args
+        if len(sys.argv) > 1 and sys.argv[1] == "--autologin":
+            self.auto_login = True
 
     def switch_view(self, view) -> None:
         if self.current_view:
@@ -79,8 +85,9 @@ class UI:
         self.add_session(user)
 
     def start(self) -> None:
-        # Only in development
-        # self.__auto_login()
-
         # on init, show login screen
         self.show_login()
+
+        # Only in development
+        if self.auto_login:
+            self.__auto_login()
