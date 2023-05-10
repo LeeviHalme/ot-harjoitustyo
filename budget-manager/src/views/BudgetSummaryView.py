@@ -97,8 +97,6 @@ class BudgetSummaryView:
             )
             return
 
-        # TODO: Validate input
-
         # update budget
         success = self.repository.update_budget(self.budget.id, name, description)
         if not success:
