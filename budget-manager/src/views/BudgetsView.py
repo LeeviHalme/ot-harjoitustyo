@@ -83,8 +83,6 @@ class BudgetsView:
             )
             return
 
-        # TODO: Add validation
-
         # create new budget
         self.repository.create_budget(name, description, self.user.id)
 
@@ -150,7 +148,9 @@ class BudgetsView:
                 lx = CTkLabel(fx, text=budget.name)
 
                 bx = CTkButton(
-                    fx, text="Avaa →", command=lambda: self.view_budget(budget.id)
+                    fx,
+                    text="Avaa →",
+                    command=lambda b_id=budget.id: self.view_budget(b_id),
                 )
                 lx.grid(row=0, column=0, pady=15, sticky="w", padx=(20, 0))
                 bx.grid(row=0, column=1, sticky="e", pady=15, padx=(0, 20))
