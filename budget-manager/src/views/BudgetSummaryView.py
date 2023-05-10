@@ -1,4 +1,5 @@
 import tkinter
+import datetime
 from customtkinter import (
     CTkFrame,
     CTkLabel,
@@ -91,7 +92,7 @@ class BudgetSummaryView:
         description = self.prompt_description()
 
         if not name or not description:
-            tkinter.messagebox.showinfo(
+            tkinter.messagebox.showerror(
                 title="Hups!", message="Nimi tai kuvaus eivät saa olla tyhjiä"
             )
             return
@@ -116,12 +117,149 @@ class BudgetSummaryView:
         # refresh view
         self.repack()
 
+    def prompt_trx_name(self) -> str:
+        """Prompt the user to enter a transaction name
+
+        Returns:
+            string | None: Name from the popup
+        """
+        # prompt transaction name
+        name_dialog = CTkInputDialog(
+            text="Syötä tapahtuman nimi (max 100 merkkiä):",
+            title=f"Lisää tapahtuma - Syötä nimi",
+        )
+
+        return name_dialog.get_input() or None
+
+    def prompt_trx_amount(self) -> str:
+        """Prompt the user to enter transaction amount
+
+        Returns:
+            string | None: Amount from the popup
+        """
+        # prompt transaction amount
+        amount_dialog = CTkInputDialog(
+            text="Syötä tapahtuman arvo senteissä (esim. 15.50 € = 1550): HUOM: Jos kyseessä on meno/kulu ilmoita arvo negatiivisena (esim. -600 € = -60000):",
+            title=f"Lisää tapahtuma - Syötä arvo",
+        )
+
+        return amount_dialog.get_input() or None
+
+    def prompt_trx_due_date(self) -> str:
+        """Prompt the user to enter transaction due date
+
+        Returns:
+            string | None: Amount from the popup
+        """
+        # prompt transaction due date
+        date_dialog = CTkInputDialog(
+            text="Syötä tapahtuman eräpäivä päivä.kk (esim. 20.5):",
+            title=f"Lisää tapahtuma - Syötä eräpäivä",
+        )
+
+        return date_dialog.get_input() or None
+
+    def _format_input_date(self, input_str: str) -> str:
+        day_num, month_num = input_str.split(".")
+        day = day_num if int(day_num) > 10 else f"0{day_num}"
+        month = month_num if int(month_num) > 10 else f"0{month_num}"
+        year = datetime.date.today().year
+        return f"{year}-{month}-{day} 00:00:00"
+
+    def _validate_date(self, input_str: str) -> bool:
+        try:
+            day_num, month_num = input_str.split(".")
+
+            # if they are not digits
+            if not day_num.isdigit() or not month_num.isdigit():
+                return False
+
+            formatted = self._format_input_date(input_str)
+
+            datetime.datetime.strptime(formatted, "%Y-%m-%d %H:%M:%S")
+            return True
+        except ValueError:
+            return False
+
+    def _validate_amount(self, input_str: str) -> bool:
+        return input_str.isdigit() or (input_str[0] == "-" and input_str[1:].isdigit())
+
+    # add a new transaction
+    def add_transaction(self):
+        """Button click handler for adding a transaction"""
+        if not self.budget:
+            return
+
+        # prompt values
+        name = self.prompt_trx_name()
+        amount = self.prompt_trx_amount()
+        due_date = self.prompt_trx_due_date()
+
+        if not name or not amount or not due_date:
+            tkinter.messagebox.showerror(
+                title="Hups!", message="Täytä huolellisesti kaikki kohdat!"
+            )
+            return
+
+        # Validate input
+        valid = True
+        failed_field = ""
+        if len(name) < 1 or len(name) > 100:
+            valid = False
+            failed_field = "nimi"
+        elif not self._validate_amount(amount):
+            valid = False
+            failed_field = "arvo"
+            print(amount)
+        elif not self._validate_date(due_date):
+            valid = False
+            failed_field = "eräpäivä"
+
+        if not valid:
+            tkinter.messagebox.showerror(
+                title="Hups!",
+                message=f"Täytä huolellisesti kaikki kohdat (validointivirhe kohdassa: {failed_field})!",
+            )
+            return
+
+        # add the new transaction
+        self.repository.add_transaction(
+            name, amount, self._format_input_date(due_date), self.budget_id
+        )
+
+        # refresh view
+        self.repack()
+
+    def remove_trx(self, trx_id: str):
+        """Remove a singular transaction by UID
+
+        Args:
+            trx_id (str): Transaction's UID to remove
+        """
+
+        success = self.repository.remove_transaction(trx_id)
+        if success:
+            tkinter.messagebox.showinfo(
+                title="Onnistui!", message="Tapahtuma poistettu!"
+            )
+
+        # re-render the view in order to remove the trx
+        self.repack()
+
     def init(self):
         """Main method to draw and initiate the view"""
         self.frame = CTkFrame(self.window, fg_color="transparent")
 
         # get budget by id
         self.budget = self.repository.get_budget_by_id(self.budget_id)
+
+        # get user current month transactions
+        transactions = self.repository.get_current_month_transactions(self.budget_id)
+
+        # get statistics about current month
+        balance, income, outcome = self.repository.get_current_month_stats(
+            self.budget_id
+        )
 
         # configure layout
         self.frame.columnconfigure(0, weight=1)
@@ -194,10 +332,7 @@ class BudgetSummaryView:
         f4.rowconfigure(3, weight=1)
         b3 = CTkButton(f5, text="Muuta budjetin tietoja", command=self.edit_budget)
         b4 = CTkButton(
-            f5,
-            text="Muuta menoja/tuloja/kuluja (tulossa)",
-            fg_color="gray",
-            state="disabled",
+            f5, text="Lisää meno / tulo / kulu", command=self.add_transaction
         )
         b5 = CTkButton(
             f5,
@@ -234,7 +369,7 @@ class BudgetSummaryView:
         f8.rowconfigure(0, weight=1)
         f8.rowconfigure(1, weight=2)
         l5 = CTkLabel(f8, text="Saldo")
-        l6 = CTkLabel(f8, text="250.43 €", font=("Monospace", 30, "bold"))
+        l6 = CTkLabel(f8, text=f"{balance} €", font=("Monospace", 30, "bold"))
         l5.grid(row=0, column=0)
         l6.grid(row=1, column=0, pady=(0, 10))
         f8.grid(row=0, column=0, padx=10, pady=(15, 10), sticky="nswe")
@@ -253,7 +388,7 @@ class BudgetSummaryView:
         f10.rowconfigure(1, weight=2)
         l7 = CTkLabel(f10, text="Tulot")
         l8 = CTkLabel(
-            f10, text="2456.32 €", text_color="green", font=("Monospace", 28, "bold")
+            f10, text=f"{income} €", text_color="green", font=("Monospace", 28, "bold")
         )
         l7.grid(row=0, column=0)
         l8.grid(row=1, column=0, pady=(0, 10))
@@ -267,7 +402,7 @@ class BudgetSummaryView:
         l9 = CTkLabel(f11, text="Menot ja kulut")
         l10 = CTkLabel(
             f11,
-            text="2205.89 €",
+            text=f"{outcome} €",
             text_color="indian red",
             font=("Monospace", 28, "bold"),
         )
@@ -281,11 +416,10 @@ class BudgetSummaryView:
         f12.rowconfigure(0, weight=0)
         f12.rowconfigure(1, weight=1)
         sf = CTkScrollableFrame(f12)
+        sf.columnconfigure(0, weight=1)
         l11 = CTkLabel(f12, text="Kaikki tapahtumat päivämäärän mukaan")
         l11.grid(row=0, column=0, pady=5)
         f12.grid(row=1, column=0, pady=15, padx=10, sticky="nwse")
-
-        transactions = []
 
         # check if no transactions
         if len(transactions) == 0:
@@ -297,8 +431,40 @@ class BudgetSummaryView:
             )
             lx.grid(row=1, column=0)
         else:
-            # TODO: create entry for each trx
+            # create entry for each trx
             for index, trx in enumerate(transactions):
-                lx = CTkLabel(sf, text="Test transaction")
-                lx.grid(row=index, column=0)
+                fx = CTkFrame(sf, fg_color="transparent")
+                fx.rowconfigure(0, weight=1)
+                fx.columnconfigure(0, weight=1)
+                fx.columnconfigure(1, weight=1)
+                fx.columnconfigure(2, weight=1)
+                fx.columnconfigure(3, weight=0)
+
+                amount = trx.get_amount()
+                lx1 = CTkLabel(
+                    fx,
+                    text=f"+{amount}" if amount > 0 else amount,
+                    text_color="red" if amount < 0 else "green",
+                    justify="left",
+                )
+
+                lx2 = CTkLabel(fx, text=trx.name)
+                lx3 = CTkLabel(
+                    fx, text=trx.get_due_date(), text_color="gray", anchor="w"
+                )
+                bx = CTkButton(
+                    fx,
+                    text="Poista",
+                    fg_color="transparent",
+                    text_color="gray",
+                    hover_color="indian red",
+                    width=65,
+                    command=lambda trx_id=trx.id: self.remove_trx(trx_id),
+                )
+
+                lx1.grid(row=0, column=0, sticky="w", padx=(10, 0))
+                lx2.grid(row=0, column=1, padx=25, sticky="we")
+                lx3.grid(row=0, column=2, sticky="we")
+                bx.grid(row=0, column=3, sticky="e")
+                fx.grid(row=index, column=0, sticky="we")
             sf.grid(row=1, column=0, sticky="we")

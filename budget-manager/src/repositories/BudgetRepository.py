@@ -1,5 +1,6 @@
 from sqlite3 import Error as SQLError
 from entities.Budget import Budget
+from entities.Transaction import Transaction
 
 
 class BudgetRepository:
@@ -121,6 +122,145 @@ class BudgetRepository:
             cursor.execute(
                 "update budgets set name = :name, description = :description WHERE id = :id",
                 {"id": budget_id, "name": name, "description": description},
+            )
+
+            self._connection.commit()
+
+            return True
+        except SQLError as error:
+            print(error)
+            return False
+
+    # get budget current month transactions by date
+    def get_current_month_transactions(self, budget_id: str) -> list:
+        """Get all current month transactions for a single Budget
+
+        Args:
+            budget_id (str): Budget UID to fetch transactions for
+
+        Returns:
+            Transaction[]: List of all matched transactions
+        """
+
+        try:
+            cursor = self._connection.cursor()
+
+            cursor.execute(
+                """
+                select 
+                  id,
+                  name,
+                  amount_cents,
+                  due_at
+                from
+                  transactions
+                where
+                  budget_id = :budget_id
+                and
+                  strftime('%Y',due_at) = strftime('%Y',date('now'))
+                and
+                  strftime('%m',due_at) = strftime('%m',date('now'))
+                order by
+                  due_at DESC 
+                """,
+                {"budget_id": budget_id},
+            )
+
+            rows = cursor.fetchall()
+
+            return [
+                Transaction(row["id"], row["name"], row["amount_cents"], row["due_at"])
+                for row in rows
+            ]
+        except SQLError as error:
+            print(error)
+            return []
+
+    # get current month statistics
+    def get_current_month_stats(self, budget_id: str) -> tuple:
+        """Get current month statistics as a tuple
+
+        Args:
+            budget_id (str): _description_
+
+        Returns:
+            tuple: Tuple consisting of (balance: int, income: int, outcome: int)
+        """
+        transactions = self.get_current_month_transactions(budget_id)
+        income = 0
+        outcome = 0
+        for trx in transactions:
+            if trx.amount_cents > 0:
+                income += trx.amount_cents
+            else:
+                outcome += trx.amount_cents
+        balance = income + outcome
+
+        return (balance / 100, income / 100, outcome / 100)
+
+    # add transaction
+    def add_transaction(
+        self, name: str, amount_cents: int, due_at: str, budget_id: str
+    ) -> Transaction:
+        """Create a new transaction
+
+        Args:
+            name (str): Describing name for the event
+            amount_cents (int): Transaction amount in cents
+            due_at (str): When this transaction is due
+            budget_id (str): Corresponding Budget's UID
+
+        Returns:
+            Transaction: The newly created transaction
+        """
+        try:
+            # generate new UUID for transaction
+            transaction_id = Transaction.generate_id()
+
+            cursor = self._connection.cursor()
+
+            cursor.execute(
+                """insert into transactions (
+                    id,
+                    name,
+                    amount_cents,
+                    due_at,
+                    budget_id
+                )
+                values (:id, :name, :amount_cents, :due_at, :budget_id)
+                """,
+                {
+                    "id": transaction_id,
+                    "name": name,
+                    "amount_cents": int(amount_cents),
+                    "due_at": due_at,
+                    "budget_id": budget_id,
+                },
+            )
+
+            self._connection.commit()
+
+            return Transaction(transaction_id, name, amount_cents, due_at)
+        except SQLError as error:
+            print(error)
+            return None
+
+    # remove a transaction by id
+    def remove_transaction(self, transaction_id: str) -> bool:
+        """Perform delete on existing transaction
+
+        Args:
+            transaction_id (str): Transaction UID to delete
+
+        Returns:
+            bool: Whether the deletion was successful
+        """
+        try:
+            cursor = self._connection.cursor()
+
+            cursor.execute(
+                "delete from transactions WHERE id = :id",
+                {"id": transaction_id},
             )
 
             self._connection.commit()

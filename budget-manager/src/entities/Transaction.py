@@ -32,10 +32,20 @@ class Transaction:
     def _format_cents(self, amount: int) -> float:
         return amount / 100
 
-    def _format_date(self, date: str) -> float:
-        return datetime.strptime(date)
+    def _format_date(self, date: str) -> str:
+        parsed = datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
 
-    def get_due_date(self) -> datetime:
+        return f"{parsed.day}.{parsed.month}."
+
+    def get_amount(self) -> float:
+        """Get transaction amount in euros
+
+        Returns:
+            float: Amount in euros
+        """
+        return self._format_cents(self.amount_cents)
+
+    def get_due_date(self) -> str:
         """Get transaction due date as datetime
 
         Returns:
