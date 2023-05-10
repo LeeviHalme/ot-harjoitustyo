@@ -260,6 +260,36 @@ class BudgetSummaryView:
                 # redirect to budgets view
                 self.show_budgets()
 
+    def _get_finnish_month_name(self):
+        month = datetime.date.today().month
+        match month:
+            case 1:
+                return "Tammikuu"
+            case 2:
+                return "Helmikuu"
+            case 3:
+                return "Maaliskuu"
+            case 4:
+                return "Huhtikuu"
+            case 5:
+                return "Toukokuu"
+            case 6:
+                return "Kesäkuu"
+            case 7:
+                return "Heinäkuu"
+            case 8:
+                return "Elokuu"
+            case 9:
+                return "Syyskuu"
+            case 10:
+                return "Lokakuu"
+            case 11:
+                return "Marraskuu"
+            case 12:
+                return "Joulukuu"
+            case _:
+                pass
+
     def init(self):
         """Main method to draw and initiate the view"""
         self.frame = CTkFrame(self.window, fg_color="transparent")
@@ -435,7 +465,10 @@ class BudgetSummaryView:
         f12.rowconfigure(1, weight=1)
         sf = CTkScrollableFrame(f12)
         sf.columnconfigure(0, weight=1)
-        l11 = CTkLabel(f12, text="Kaikki tapahtumat päivämäärän mukaan")
+        l11 = CTkLabel(
+            f12,
+            text=f"Kaikki tapahtumat päivämäärän mukaan ({self._get_finnish_month_name()})",
+        )
         l11.grid(row=0, column=0, pady=5)
         f12.grid(row=1, column=0, pady=15, padx=10, sticky="nwse")
 
