@@ -69,7 +69,9 @@ class AuthRepository:
         # hash user password
         hashed = self._generate_password_hash(password)
 
-        self.user_repository.create_new_user(name, username, hashed)
+        success = self.user_repository.create_new_user(name, username, hashed)
+        if not success:
+            return False
 
         # get user from db and store in state
         user = self.user_repository.get_by_username(username)

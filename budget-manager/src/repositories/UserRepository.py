@@ -1,3 +1,4 @@
+from sqlite3 import Error as SQLError
 from entities.User import User
 
 
@@ -21,22 +22,26 @@ class UserRepository:
         Returns:
             User: Dictionary of a raw user object. (fixme: should probably return User)
         """
-        cursor = self._connection.cursor()
+        try:
+            cursor = self._connection.cursor()
 
-        cursor.execute(
-            "select id, name, username, password_hash from users where username = :username",
-            {"username": username},
-        )
+            cursor.execute(
+                "select id, name, username, password_hash from users where username = :username",
+                {"username": username},
+            )
 
-        row = cursor.fetchone()
+            row = cursor.fetchone()
 
-        if not row:
+            if not row:
+                return None
+
+            return dict(row)
+        except SQLError as error:
+            print(error)
             return None
 
-        return dict(row)
-
     # create new user
-    def create_new_user(self, name: str, username: str, password_hash: str) -> None:
+    def create_new_user(self, name: str, username: str, password_hash: str) -> bool:
         """Creates a new user on the db
 
         Args:
@@ -47,11 +52,22 @@ class UserRepository:
         # generate new UUID for user
         user_id = User.generate_id()
 
-        cursor = self._connection.cursor()
+        try:
+            cursor = self._connection.cursor()
 
-        cursor.execute(
-            "insert into users (id, name, username, password_hash) values (:id, :name, :username, :hash)",
-            {"id": user_id, "name": name, "username": username, "hash": password_hash},
-        )
+            cursor.execute(
+                "insert into users (id, name, username, password_hash) values (:id, :name, :username, :hash)",
+                {
+                    "id": user_id,
+                    "name": name,
+                    "username": username,
+                    "hash": password_hash,
+                },
+            )
 
-        self._connection.commit()
+            self._connection.commit()
+
+            return True
+        except SQLError as error:
+            print(error)
+            return False
