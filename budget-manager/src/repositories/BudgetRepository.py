@@ -59,7 +59,7 @@ class BudgetRepository:
 
             return Budget(row["id"], row["name"], row["description"], row["user_id"])
         except SQLError as error:
-            print(error)
+            print(f"SQLError: {error}")
             return None
 
     # create a new budget
@@ -101,7 +101,7 @@ class BudgetRepository:
 
             return Budget(budget_id, name, description, user_id)
         except SQLError as error:
-            print(error)
+            print(f"SQLError: {error}")
             return None
 
     # update budget name and description
@@ -128,7 +128,7 @@ class BudgetRepository:
 
             return True
         except SQLError as error:
-            print(error)
+            print(f"SQLError: {error}")
             return False
 
     def remove_budget_transactions(self, budget_id: str) -> bool:
@@ -152,7 +152,7 @@ class BudgetRepository:
 
             return True
         except SQLError as error:
-            print(error)
+            print(f"SQLError: {error}")
             return False
 
     def remove_budget(self, budget_id: str) -> bool:
@@ -180,7 +180,7 @@ class BudgetRepository:
 
             return True
         except SQLError as error:
-            print(error)
+            print(f"SQLError: {error}")
             return False
 
     # get budget current month transactions by date
@@ -225,7 +225,7 @@ class BudgetRepository:
                 for row in rows
             ]
         except SQLError as error:
-            print(error)
+            print(f"SQLError: {error}")
             return []
 
     # get current month statistics
@@ -294,7 +294,7 @@ class BudgetRepository:
 
             return Transaction(transaction_id, name, amount_cents, due_at)
         except SQLError as error:
-            print(error)
+            print(f"SQLError: {error}")
             return None
 
     # remove a transaction by id
@@ -319,5 +319,5 @@ class BudgetRepository:
 
             return True
         except SQLError as error:
-            print(error)
+            print(f"SQLError: {error}")
             return False

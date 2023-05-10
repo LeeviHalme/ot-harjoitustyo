@@ -207,7 +207,6 @@ class BudgetSummaryView:
         elif not self._validate_amount(amount):
             valid = False
             failed_field = "arvo"
-            print(amount)
         elif not self._validate_date(due_date):
             valid = False
             failed_field = "eräpäivä"

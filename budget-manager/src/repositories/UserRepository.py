@@ -37,7 +37,7 @@ class UserRepository:
 
             return dict(row)
         except SQLError as error:
-            print(error)
+            print(f"SQLError: {error}")
             return None
 
     # create new user
@@ -69,5 +69,5 @@ class UserRepository:
 
             return True
         except SQLError as error:
-            print(error)
+            print(f"SQLError: {error}")
             return False
