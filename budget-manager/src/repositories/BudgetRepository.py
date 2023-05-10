@@ -131,6 +131,58 @@ class BudgetRepository:
             print(error)
             return False
 
+    def remove_budget_transactions(self, budget_id: str) -> bool:
+        """Perform delete on existing budget transactions
+
+        Args:
+            budget_id (str): Budget UID to delete transactions from
+
+        Returns:
+            bool: Whether the deletion was successful
+        """
+        try:
+            cursor = self._connection.cursor()
+
+            cursor.execute(
+                "delete from transactions WHERE budget_id = :id",
+                {"id": budget_id},
+            )
+
+            self._connection.commit()
+
+            return True
+        except SQLError as error:
+            print(error)
+            return False
+
+    def remove_budget(self, budget_id: str) -> bool:
+        """Perform delete on existing budget
+
+        Args:
+            budget_id (str): Budget UID to delete
+
+        Returns:
+            bool: Whether the deletion was successful
+        """
+        try:
+            success = self.remove_budget_transactions(budget_id)
+            if not success:
+                return False
+
+            cursor = self._connection.cursor()
+
+            cursor.execute(
+                "delete from budgets WHERE id = :id",
+                {"id": budget_id},
+            )
+
+            self._connection.commit()
+
+            return True
+        except SQLError as error:
+            print(error)
+            return False
+
     # get budget current month transactions by date
     def get_current_month_transactions(self, budget_id: str) -> list:
         """Get all current month transactions for a single Budget

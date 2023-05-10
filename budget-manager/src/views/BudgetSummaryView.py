@@ -182,7 +182,6 @@ class BudgetSummaryView:
     def _validate_amount(self, input_str: str) -> bool:
         return input_str.isdigit() or (input_str[0] == "-" and input_str[1:].isdigit())
 
-    # add a new transaction
     def add_transaction(self):
         """Button click handler for adding a transaction"""
         if not self.budget:
@@ -243,6 +242,24 @@ class BudgetSummaryView:
 
         # re-render the view in order to remove the trx
         self.repack()
+
+    def remove_budget(self):
+        """Prompt user to confirm deletion, and delete current budget"""
+
+        # prompt user a yes / no
+        result = tkinter.messagebox.askyesno(
+            title="Vahvistus",
+            message=f'Haluatko varmasti poistaa budjetin "{self.budget.name}"?',
+        )
+        if result:
+            success = self.repository.remove_budget(self.budget_id)
+            if success:
+                tkinter.messagebox.showinfo(
+                    title="Onnistui!", message="Budjetti poistettu onnistuneesti."
+                )
+
+                # redirect to budgets view
+                self.show_budgets()
 
     def init(self):
         """Main method to draw and initiate the view"""
@@ -339,7 +356,11 @@ class BudgetSummaryView:
             state="disabled",
         )
         b6 = CTkButton(
-            f5, text="Poista budjetti", fg_color="red", hover_color="indian red"
+            f5,
+            text="Poista budjetti",
+            fg_color="red",
+            hover_color="indian red",
+            command=self.remove_budget,
         )
         b3.grid(row=0, column=0, sticky="nwes", padx=15, pady=15)
         b4.grid(row=1, column=0, sticky="nwes", padx=15, pady=(0, 15))
