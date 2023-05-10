@@ -13,7 +13,6 @@ class BudgetRepository:
     def __init__(self, connection) -> None:
         self._connection = connection
 
-    # get user budgets
     def get_user_budgets(self, user_id: str) -> list:
         """Fetches all the budgets for a given user
 
@@ -36,7 +35,6 @@ class BudgetRepository:
             Budget(row["id"], row["name"], row["description"], user_id) for row in rows
         ]
 
-    # get budget by id
     def get_budget_by_id(self, budget_id: str) -> Budget:
         """Get a singular budget by id.
         Does not care about budget owner permissions.
@@ -62,7 +60,6 @@ class BudgetRepository:
             print(f"SQLError: {error}")
             return None
 
-    # create a new budget
     def create_budget(self, name: str, description: str, user_id: str) -> Budget:
         """Create a new budget
 
@@ -104,7 +101,6 @@ class BudgetRepository:
             print(f"SQLError: {error}")
             return None
 
-    # update budget name and description
     def update_budget(self, budget_id: str, name: str, description: str) -> bool:
         """Perform update on existing budget
 
@@ -183,9 +179,8 @@ class BudgetRepository:
             print(f"SQLError: {error}")
             return False
 
-    # get budget current month transactions by date
     def get_current_month_transactions(self, budget_id: str) -> list:
-        """Get all current month transactions for a single Budget
+        """Get all current month transactions for a single Budget and order by date
 
         Args:
             budget_id (str): Budget UID to fetch transactions for
@@ -228,7 +223,6 @@ class BudgetRepository:
             print(f"SQLError: {error}")
             return []
 
-    # get current month statistics
     def get_current_month_stats(self, budget_id: str) -> tuple:
         """Get current month statistics as a tuple
 
@@ -250,7 +244,6 @@ class BudgetRepository:
 
         return (balance / 100, income / 100, outcome / 100)
 
-    # add transaction
     def add_transaction(
         self, name: str, amount_cents: int, due_at: str, budget_id: str
     ) -> Transaction:
@@ -297,7 +290,6 @@ class BudgetRepository:
             print(f"SQLError: {error}")
             return None
 
-    # remove a transaction by id
     def remove_transaction(self, transaction_id: str) -> bool:
         """Perform delete on existing transaction
 

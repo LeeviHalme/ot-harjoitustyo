@@ -4,7 +4,6 @@ from repositories.AuthRepository import AuthRepository
 from repositories.BudgetRepository import BudgetRepository
 
 
-# initialize db, drop and create
 def initialize_database():
     """Initialize database by dropping existing tables
     (data) and creating new empty tables
@@ -15,7 +14,6 @@ def initialize_database():
     create_tables(connection)
 
 
-# insert testing data
 def insert_test_data():
     """Inserts data to the db in order to perform tests
     on the repository methods

@@ -42,7 +42,6 @@ class LoginView:
 
         self.init()
 
-    # login user using local auth
     def login(self):
         """Button click handler for logging in"""
         if not self.username_entry or not self.password_entry:
@@ -59,10 +58,8 @@ class LoginView:
             )
             return
 
-        # use repository method
-        success = self.repository.login_using_username_pass(username, password)
-
         # if login wasn't successful
+        success = self.repository.login_using_username_pass(username, password)
         if not success:
             tkinter.messagebox.showerror(
                 title="Hups!", message="Väärä käyttäjätunnus tai salasana."
@@ -136,8 +133,3 @@ class LoginView:
         )
         b1.grid(row=2, column=0, sticky="we", padx=15)
         b2.grid(row=2, column=1, sticky="we", padx=15)
-
-        # align inputs
-        # l4.grid(row=1, column=0)
-        # e1.grid(row=0, column=1)
-        # e2.grid(row=1, column=1)

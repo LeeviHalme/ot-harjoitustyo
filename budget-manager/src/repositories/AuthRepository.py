@@ -17,7 +17,6 @@ class AuthRepository:
         self._connection = connection
         self.user_repository = UserRepository(connection)
 
-    # get user session
     def get_session(self) -> User:
         """Returns the current user in session
 
@@ -26,7 +25,6 @@ class AuthRepository:
         """
         return self._user
 
-    # validate hash and pass
     def _validate_password_hash(self, hashed: str, password: str) -> bool:
         # encoding user password
         pwd_bytes = password.encode("utf-8")
@@ -35,7 +33,6 @@ class AuthRepository:
         # checking password and return boolean
         return bcrypt.checkpw(pwd_bytes, hash_bytes)
 
-    # hash given password
     def _generate_password_hash(self, password: str) -> str:
         # encoding user password
         pwd_bytes = password.encode("utf-8")
@@ -43,13 +40,11 @@ class AuthRepository:
         # generating the salt
         salt = bcrypt.gensalt()
 
+        # Hashing the password
         pw_hash = bcrypt.hashpw(pwd_bytes, salt)
 
-        # Hashing the password
         return pw_hash.decode("utf-8")
 
-    # register a new user
-    # returns boolean status flag
     def register_new_user(self, name: str, username: str, password: str) -> bool:
         """Registers a new user
 
@@ -73,14 +68,12 @@ class AuthRepository:
         if not success:
             return False
 
-        # get user from db and store in state
+        # store in state
         user = self.user_repository.get_by_username(username)
         self._user = User(user["id"], user["name"], user["username"])
 
         return True
 
-    # login using username and password
-    # returns boolean status flag
     def login_using_username_pass(self, username: str, password: str) -> bool:
         """Login to an existing account with username and password
 

@@ -12,7 +12,6 @@ class UserRepository:
     def __init__(self, connection) -> None:
         self._connection = connection
 
-    # get user by username
     def get_by_username(self, username: str):
         """Get user object by their username
 
@@ -40,7 +39,6 @@ class UserRepository:
             print(f"SQLError: {error}")
             return None
 
-    # create new user
     def create_new_user(self, name: str, username: str, password_hash: str) -> bool:
         """Creates a new user on the db
 

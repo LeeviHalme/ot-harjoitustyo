@@ -25,6 +25,7 @@ class BudgetSummaryView:
         logout (function):              Method to log user out
         show_budgets (function):        Show budgets view
         repack (function):              Repack the frame (destroy and pack)
+
         repository (BudgetRepository):  Budget repository instance
     """
 
@@ -81,7 +82,6 @@ class BudgetSummaryView:
 
         return description_dialog.get_input() or None
 
-    # enter new values for budget
     def edit_budget(self):
         """Button click handler for editing the budget details"""
         if not self.budget:
@@ -97,7 +97,6 @@ class BudgetSummaryView:
             )
             return
 
-        # update budget
         success = self.repository.update_budget(self.budget.id, name, description)
         if not success:
             tkinter.messagebox.showerror(

@@ -1,4 +1,3 @@
-# drop all existing tables
 def drop_tables(connection):
     """Drop all existing data from database
 
@@ -15,7 +14,6 @@ def drop_tables(connection):
     connection.commit()
 
 
-# create tables
 def create_tables(connection):
     """Create initial tables
 
@@ -66,7 +64,6 @@ def create_tables(connection):
     connection.commit()
 
 
-# initialize db, drop and create
 def initialize_database():
     """Initialize database by running the drop and create table-commands"""
     # pylint is disabled for below line because when running the file

@@ -34,7 +34,6 @@ class RegisterView:
 
         # declare text variables
         self.title = "Budjetointisovellus"
-        # self.subtitle = "Hallitse talouttasi budjetointisovelluksen avulla. "
         self.subtitle = "Hallitse talouttasi tehokkaasti budjetointisovelluksen avulla. Voit lisätä henkilökohtaiseen budjettiisi koko kuukauden menot, tulot ja yllättävät kulut. Voit myös hallita useita budjetteja samalla käyttäjällä."
 
         # declare state
@@ -45,7 +44,6 @@ class RegisterView:
 
         self.init()
 
-    # register user using local auth
     def register(self):
         """Button click handler for registering a new user"""
         if (
@@ -77,10 +75,8 @@ class RegisterView:
             )
             return
 
-        # use repository method
-        success = self.repository.register_new_user(name, username, password)
-
         # if register wasn't successful
+        success = self.repository.register_new_user(name, username, password)
         if not success:
             tkinter.messagebox.showerror(
                 title="Rekisteröinti epäonnistui",
@@ -168,8 +164,3 @@ class RegisterView:
         b2 = CTkButton(f2, text="← Takaisin", command=self.login_view, fg_color="gray")
         b1.grid(row=4, column=0, sticky="we", padx=15)
         b2.grid(row=4, column=1, sticky="we", padx=15)
-
-        # align inputs
-        # l4.grid(row=1, column=0)
-        # e1.grid(row=0, column=1)
-        # e2.grid(row=1, column=1)

@@ -23,17 +23,14 @@ class UI:
         self.current_view = view
         self.current_view.pack()
 
-    # add session
     def add_session(self, user):
         self.user = user
         self.show_budgets()
 
-    # delete session
     def delete_session(self):
         self.user = None
         self.show_login()
 
-    # show singular budget page
     def view_budget(self, budget_id: str) -> None:
         view = BudgetSummaryView(
             self.window,
@@ -45,7 +42,6 @@ class UI:
         )
         self.switch_view(view)
 
-    # show budgets view
     def show_budgets(self) -> None:
         view = BudgetsView(
             self.window,
@@ -56,7 +52,6 @@ class UI:
         )
         self.switch_view(view)
 
-    # show login view
     def show_login(self) -> None:
         view = LoginView(
             self.window,
@@ -65,7 +60,6 @@ class UI:
         )
         self.switch_view(view)
 
-    # show register view
     def show_register(self) -> None:
         view = RegisterView(self.window, show_login=self.show_login)
         self.switch_view(view)
