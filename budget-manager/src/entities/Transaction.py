@@ -54,4 +54,4 @@ class Transaction:
         return self._format_date(self.due_at)
 
     def __str__(self) -> str:
-        return f"{self.name}- {self._format_cents(self.amount_cents)}€ - ID: {self.id}"
+        return f"{self.name} - {self._format_cents(self.amount_cents)}€ - ID: {self.id}"
