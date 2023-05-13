@@ -49,7 +49,7 @@ class Transaction:
         """Get transaction due date as datetime
 
         Returns:
-            datetime: Due date
+            str: Due date
         """
         return self._format_date(self.due_at)
 
