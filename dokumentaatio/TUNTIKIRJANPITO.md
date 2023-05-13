@@ -13,4 +13,5 @@
 | 2.5   | 5    | käyttöliittymän tekoa, sekä lisää sovelluslogiikkaa |
 | 9.5   | 3    | pylint-virheiden korjausta, budjettitapahtumien sovelluslogiikkaa |
 | 10.5  | 3    | projektin viimeistelyä, sekä lisää sovelluslogiikkaa |
-| yht   | 33.5   |  | 
+| 13.5  | 2    | loppupalautuksen tekoa, pylint-virheiden korjausta, testien tekoa, dokumenttien tekoa |
+| yht   | 35.5   |  | 
