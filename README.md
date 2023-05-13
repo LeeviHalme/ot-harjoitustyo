@@ -14,6 +14,9 @@ This repository contains weekly excercises as well as the main project files for
 - [Changelog](/dokumentaatio/CHANGELOG.md)
 - [Architecture Description](/dokumentaatio/ARKKITEHTUURI.md)
 - [Usage Guide](/dokumentaatio/KAYTTOOHJE.md)
+- [Testing Document](/dokumentaatio/TESTAUS.md)
+
+*All documents under Quick links are currently only in Finnish (fi-FI)*
 
 ### Local Setup
 1. Copy the project from github:

@@ -41,3 +41,10 @@
 - Poistettu uudemman python-version ominaisuuksia (liitostyypit), jotta sovellus toimisi alemmilla versioilla
   - Ikävä kyllä en pystynyt testaamaan sovellusta virtuaalityöasemalla (jää ikuisesti pyörimään "ladataan" näyttöön) ja aika ei riittänyt etsimään vaihtoehtoisia testauskeinoja, joten varmuutta yhteensopivuudesta ei ole.
 - Lisätty dokumentaatiota ja eriytetty kuvat omaan kansioon
+
+## Viikko 7
+- Lisätty budjetille tapahtumat, sekä siihen liittyvät entityt, sekä testit.
+- Lisätty ominaisuus lisätä ja poistaa budjetin tapahtumia :heavy_check_mark:
+- Lisätty statistiikka tietokannasta *Näytä budjetti*-käyttöliittymänäkymään
+- Lisätty ominaisuus poistaa budjetti, sekä tämän toiminnon vahvistusikkuna :heavy_check_mark:
+- Muutettu tiedostojen nimiä ja korjattu pylint-virheitä

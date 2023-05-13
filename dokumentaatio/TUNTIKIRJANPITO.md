@@ -10,5 +10,7 @@
 | 24.4. | 3    | sovelluksen diagrammien tekoa, sekä arkkitehtuuridokumenttien kirjoittamista  |
 | 25.4. | 1.5  | uuden käyttöliittymänäkymän tekoa, sekä budjetti-sovelluslogiikan tekoa |
 | 1.5.  | 2    | docstring-dokumentointia, pylint-virheiden korjausta |
-| 2.5   | 5    | käyttöliittymän tekoa, sekä lisää sovelluslogiikkaa |  
-| yht   | 27.5   |  | 
+| 2.5   | 5    | käyttöliittymän tekoa, sekä lisää sovelluslogiikkaa |
+| 9.5   | 3    | pylint-virheiden korjausta, budjettitapahtumien sovelluslogiikkaa |
+| 10.5  | 3    | projektin viimeistelyä, sekä lisää sovelluslogiikkaa |
+| yht   | 33.5   |  | 
