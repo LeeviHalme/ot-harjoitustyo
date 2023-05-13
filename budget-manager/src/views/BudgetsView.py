@@ -1,7 +1,7 @@
 import tkinter
 from customtkinter import CTkFrame, CTkLabel, CTkButton, CTkInputDialog
 from utils.connect_database import get_database_connection
-from repositories.BudgetRepository import BudgetRepository
+from repositories.budget_repository import BudgetRepository
 
 
 class BudgetsView:

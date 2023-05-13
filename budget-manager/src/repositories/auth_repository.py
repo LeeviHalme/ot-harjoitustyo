@@ -1,5 +1,5 @@
 import bcrypt
-from repositories.UserRepository import UserRepository
+from repositories.user_repository import UserRepository
 from entities.user import User
 
 

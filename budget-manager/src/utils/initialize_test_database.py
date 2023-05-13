@@ -1,8 +1,8 @@
 from datetime import date
 from utils.connect_database import get_database_connection
 from utils.initialize_database import drop_tables, create_tables
-from repositories.AuthRepository import AuthRepository
-from repositories.BudgetRepository import BudgetRepository
+from repositories.auth_repository import AuthRepository
+from repositories.budget_repository import BudgetRepository
 
 
 def initialize_database():

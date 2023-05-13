@@ -8,7 +8,7 @@ from customtkinter import (
     CTkScrollableFrame,
 )
 from utils.connect_database import get_database_connection
-from repositories.BudgetRepository import BudgetRepository
+from repositories.budget_repository import BudgetRepository
 
 
 class BudgetSummaryView:

@@ -68,7 +68,7 @@ class UI:
     # only to be used in development
     def __auto_login(self):
         from utils.connect_database import get_database_connection
-        from repositories.AuthRepository import AuthRepository
+        from repositories.auth_repository import AuthRepository
 
         connection = get_database_connection()
         repository = AuthRepository(connection)

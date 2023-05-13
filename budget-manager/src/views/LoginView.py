@@ -1,7 +1,7 @@
 import tkinter
 from customtkinter import CTkFrame, CTkLabel, CTkEntry, CTkButton
 from utils.connect_database import get_database_connection
-from repositories.AuthRepository import AuthRepository
+from repositories.auth_repository import AuthRepository
 
 
 class LoginView:
