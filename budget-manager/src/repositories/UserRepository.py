@@ -54,7 +54,8 @@ class UserRepository:
             cursor = self._connection.cursor()
 
             cursor.execute(
-                "insert into users (id, name, username, password_hash) values (:id, :name, :username, :hash)",
+                """insert into users (id, name, username, password_hash)
+                values (:id, :name, :username, :hash)""",
                 {
                     "id": user_id,
                     "name": name,
