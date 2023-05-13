@@ -1,6 +1,6 @@
 from sqlite3 import Error as SQLError
-from entities.Budget import Budget
-from entities.Transaction import Transaction
+from entities.budget import Budget
+from entities.transaction import Transaction
 
 
 class BudgetRepository:

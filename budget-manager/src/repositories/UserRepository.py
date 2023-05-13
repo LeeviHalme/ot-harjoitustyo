@@ -1,5 +1,5 @@
 from sqlite3 import Error as SQLError
-from entities.User import User
+from entities.user import User
 
 
 class UserRepository:
