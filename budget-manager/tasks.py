@@ -23,7 +23,7 @@ def init_db(ctx):
 # suorita testit src/tests kansiosta
 @task
 def test(ctx):
-    ctx.run("pytest src", pty=True)
+    ctx.run("ENV_NAME=test pytest src", pty=True)
 
 
 # koodin staattinen analysointi
