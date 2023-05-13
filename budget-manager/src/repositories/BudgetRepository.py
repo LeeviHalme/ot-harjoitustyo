@@ -55,7 +55,11 @@ class BudgetRepository:
 
             row = cursor.fetchone()
 
-            return Budget(row["id"], row["name"], row["description"], row["user_id"])
+            return (
+                Budget(row["id"], row["name"], row["description"], row["user_id"])
+                if row
+                else None
+            )
         except SQLError as error:
             print(f"SQLError: {error}")
             return None
