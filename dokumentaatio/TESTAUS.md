@@ -7,7 +7,7 @@ Ohjelmistoa testataan automatisoiduin yksikkö -ja integraatiotestein unittestil
 
 ### Sovelluslogiikka
 
-Sovelluslogiikasta vastaavia luokkia (repositoriot, muotoa `XRepository.py`) testataan `tests/test_x_repository.py` luokilla. Riippuen repositoriosta, testien alussa saatetaan injektoida tietokantaan testien vaatimaa tietoa.
+Sovelluslogiikasta vastaavia luokkia (repositoriot, muotoa `XRepository.py`) testataan `tests/test_x_repository.py` luokilla. Riippuen repositoriosta, testien alussa saatetaan injektoida tietokantaan testien vaatimaa tietoa. **Testit käyttävät muusta sovelluksesta irrallaan olevaa `test_database.sqlite`-tietokantaa**
 
 
 ### Testauskattavuus
