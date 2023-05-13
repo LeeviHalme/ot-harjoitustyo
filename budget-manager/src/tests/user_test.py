@@ -1,5 +1,5 @@
 import unittest
-from entities.User import User
+from entities.user import User
 
 
 class TestUser(unittest.TestCase):

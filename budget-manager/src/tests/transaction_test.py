@@ -1,5 +1,5 @@
 import unittest
-from entities.Transaction import Transaction
+from entities.transaction import Transaction
 
 
 class TestTransaction(unittest.TestCase):

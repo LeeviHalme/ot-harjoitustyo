@@ -1,7 +1,7 @@
 import unittest
 from utils.connect_database import get_database_connection
 from utils.initialize_test_database import initialize_database, insert_test_data
-from repositories.AuthRepository import AuthRepository
+from repositories.auth_repository import AuthRepository
 
 
 class TestAuthRepository(unittest.TestCase):

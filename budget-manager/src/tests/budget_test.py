@@ -1,5 +1,5 @@
 import unittest
-from entities.Budget import Budget
+from entities.budget import Budget
 
 
 class TestBudget(unittest.TestCase):
