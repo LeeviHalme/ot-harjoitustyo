@@ -2,11 +2,15 @@
 
 Aloita lataamalla sovelluksen viimeisimmän releasen lähdekoodi linkistä [Latest Release](https://github.com/LeeviHalme/ot-harjoitustyo/releases/latest). 
 
+**HUOM:** Suorittaessasi sovellusta yliopiston VMWarella (Cubbli Linux) tulee projektihakemistosta poistaa `poetry.lock` tiedosto, jotta vanha poetry-versio osaa löytää riippuvuudet. Ilman tiedoston poistoa alla olevat komennot epäonnistuvat.
+
 ## Ohjelman käynnistäminen
 Siirry projektihakemistoon
 ```bash
 cd budget-manager
 ```
+
+( Jos käytät virtuaalityöpöytää, poista `poetry.lock` komennolla `rm poetry.lock` )
 
 Asenna riippuvuudet
 ```bash
